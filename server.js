@@ -6,7 +6,20 @@ const multer = require("multer");
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://dex-quest-client-o97axzd3w-dennisk94s-projects.vercel.app"
+];
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true
+}));
 app.use(express.json());
 
 const client = new MongoClient(process.env.MONGO_URI, {
