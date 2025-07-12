@@ -24,7 +24,7 @@ npm install
 
 ### 3. Setup environment variables  
 
-PORT=3001  
+PORT=5000  
 MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/database-name  
 JWT_SECRET=your_jwt_secret   
 
