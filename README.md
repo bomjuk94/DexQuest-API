@@ -17,30 +17,30 @@ The backend for the DexQuest application, built with Node.js, Express, and Mongo
 
 git clone https://github.com/dennisk94/DexQuest-API  
 
-### 2 Install Dependencies  
+### 2. Install Dependencies  
 
 cd DexQuest-API-main  
 npm install  
 
-### 3 Setup environment variables  
+### 3. Setup environment variables  
 
 PORT=3001  
 MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/database-name  
 JWT_SECRET=your_jwt_secret   
 
-### 4 Start the Server  
+### 4. Start the Server  
 
 npm run dev  
 
 ### API Endpoints  
 
-## Auth  
+#### Auth  
 
 POST /api/login  
 
 POST /api/register  
 
-## Profile  
+#### Profile  
 
 GET /api/profile/teams  
 
@@ -48,7 +48,7 @@ POST /api/profile/teams
 
 DELETE /api/profile/teams/:id  
 
-## Comparisons  
+#### Comparisons  
 
 GET /api/profile/comparisons  
 
