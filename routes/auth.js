@@ -74,18 +74,8 @@ module.exports = (client) => {
             const token = jwt.sign(
                 { userId: result.insertedId, username: usernameCaseInsensitive },
                 process.env.JWT_SECRET,
-                { expiresIn: "10s" }
+                { expiresIn: "1h" }
             );
-
-            const decoded = jwt.decode(token);
-            console.log("Token EXP (server):", decoded.exp, "→", new Date(decoded.exp * 1000));
-
-
-            // const token = jwt.sign(
-            //     { userId: result.insertedId, username },
-            //     process.env.JWT_SECRET,
-            //     { expiresIn: "10s" }
-            // );
 
             return res.json({ message: "User registered successfully", token });
 
@@ -124,12 +114,8 @@ module.exports = (client) => {
             const token = jwt.sign(
                 { userId: user._id, username: user.username },
                 process.env.JWT_SECRET,
-                { expiresIn: "10s" }
+                { expiresIn: "1h" }
             );
-
-            const decoded = jwt.decode(token);
-            console.log("✅ Token created:", token);
-            console.log("📅 Expires at:", decoded.exp, "→", new Date(decoded.exp * 1000));
 
             return res.json({ message: "Login successful", token });
         } catch (err) {
