@@ -5,6 +5,8 @@ const cors = require("cors");
 const multer = require("multer");
 
 const app = express();
+console.log('server is starting');
+
 
 const allowedOrigins = [
     "http://localhost:5173",

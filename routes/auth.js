@@ -72,10 +72,20 @@ module.exports = (client) => {
             })
 
             const token = jwt.sign(
-                { userId: result.insertedId, username },
+                { userId: result.insertedId, username: usernameCaseInsensitive },
                 process.env.JWT_SECRET,
-                { expiresIn: "1h" }
+                { expiresIn: "10s" }
             );
+
+            const decoded = jwt.decode(token);
+            console.log("Token EXP (server):", decoded.exp, "→", new Date(decoded.exp * 1000));
+
+
+            // const token = jwt.sign(
+            //     { userId: result.insertedId, username },
+            //     process.env.JWT_SECRET,
+            //     { expiresIn: "10s" }
+            // );
 
             return res.json({ message: "User registered successfully", token });
 
@@ -86,6 +96,8 @@ module.exports = (client) => {
     });
 
     router.post("/login", async (req, res) => {
+        console.log('login route hit');
+
         const { username, password } = req.body;
 
         const usernameCaseInsensitive = username.toLowerCase()
@@ -112,8 +124,12 @@ module.exports = (client) => {
             const token = jwt.sign(
                 { userId: user._id, username: user.username },
                 process.env.JWT_SECRET,
-                { expiresIn: "1h" }
+                { expiresIn: "10s" }
             );
+
+            const decoded = jwt.decode(token);
+            console.log("✅ Token created:", token);
+            console.log("📅 Expires at:", decoded.exp, "→", new Date(decoded.exp * 1000));
 
             return res.json({ message: "Login successful", token });
         } catch (err) {
