@@ -750,12 +750,28 @@ module.exports = (client) => {
     });
 
     router.get("/pokemon/light", async (req, res) => {
+        // TODO: Fetch first 50 on initial load, then fetch the rest
+        // TODO: Add filtering logic (name, type, alphabetical, stat values and orientation, )
+        const limit = parseInt(req.query.limit) || 50
+        const offset = parseInt(req.query.offset) || 0
 
         try {
             const pokedexDb = client.db("pokedex");
             const pokemonCollection = pokedexDb.collection("pokemonLight");
-            const allPokemon = await pokemonCollection.find({}).sort({ id: 1 }).toArray();
-            return res.json(allPokemon);
+            const allPokemon = await
+                pokemonCollection
+                    .find({})
+                    .skip(offset)
+                    .limit(limit)
+                    .sort({ id: 1 })
+                    .toArray();
+
+            const total = await pokemonCollection.countDocuments()
+
+            return res.json({
+                data: allPokemon,
+                total,
+            });
         } catch (err) {
             console.error('Error fetching Pokémon:', err);
             res.status(500).json({ error: 'Internal Server Error' });
