@@ -29,6 +29,10 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.get('/api/ping', (req, res) => {
+    res.status(200).send('pong');
+});
+
 const client = new MongoClient(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
