@@ -9,25 +9,22 @@ console.log("server is starting");
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://dex-quest-client-o97axzd3w-dennisk94s-projects.vercel.app",
-    "https://dex-quest-client-2s34y60bg-dennisk94s-projects.vercel.app",
+    "https://dexquest.bomjukim.com/",
+    "https://dex-quest-client.vercel.app/",
 ];
 
-app.use(
-    cors({
-        origin: (origin, callback) => {
-            console.log("🌍 Incoming origin:", origin);
-
-            if (!origin || allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
-                callback(null, true); // ✅ allow
-            } else {
-                console.warn("🚫 Blocked CORS request from:", origin);
-                callback(null, false); // ✅ silently deny
-            }
-        },
-        credentials: true,
-    })
-);
+app.use(cors({
+    origin: (origin, callback) => {
+        console.log('🌍 Incoming origin:', origin);
+        if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+            callback(null, true);
+        } else {
+            console.warn('🚫 Blocked CORS request from:', origin);
+            callback(null, false);
+        }
+    },
+    credentials: true,
+}));
 
 app.use(express.json());
 
