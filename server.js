@@ -9,8 +9,8 @@ console.log("server is starting");
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://dexquest.bomjukim.com/",
-    "https://dex-quest-client.vercel.app/",
+    "https://dexquest.bomjukim.com",
+    "https://dex-quest-client.vercel.app",
 ];
 
 app.use(cors({
